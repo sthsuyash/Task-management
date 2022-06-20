@@ -1,22 +1,41 @@
 import React from 'react';
 
-export default function Form({setInputText}) {
+export default function Form(props) {
 
     const inputTextHandler = (e) => {
         // console.log(e.target.value);
-        setInputText(e.target.value);
-    }
+        props.setInputText(e.target.value);
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        props.setTodos([
+            ...props.todos,
+            {
+                text: props.inputText,
+                completed: false,
+                id: Math.floor(Math.random() * 100)
+            }
+        ]);
+        props.setInputText("");
+    };
+
+    const statusHandler = (e) => {
+        props.setStatus(e.target.value);
+        // console.log(e.target.value);
+    };
 
     return (
-        <form>
+        <form onSubmit={handleSubmit}>
+
             {/* todo input from user */}
             <input
                 type="text"
                 placeholder='Add item'
                 className="todo-input"
                 onChange={inputTextHandler}
-                // value={formData.todoInput}
-                name="todoInput"
+                value={props.inputText}
+                name="inputText"
             />
 
             {/* '+' button to add items */}
@@ -32,8 +51,8 @@ export default function Form({setInputText}) {
                 <select
                     name="todos"
                     className="filter-todo"
-                // onChange={handleChange}
-                // value={formData.todos}
+                    onChange={statusHandler}
+                    value={props.status}
                 >
                     <option value="all">All</option>
                     <option value="completed">Completed</option>
@@ -42,4 +61,4 @@ export default function Form({setInputText}) {
             </div>
         </form>
     );
-}
+};
