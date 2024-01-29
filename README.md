@@ -68,7 +68,7 @@ The application will allow users to create, update, and delete tasks. Tasks shou
 5. Migrate the database.
 
    ```bash
-   npm run migrate
+   npx prisma migrate dev --name init
    ```
 
 6. Seed the database.
