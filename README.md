@@ -1,70 +1,98 @@
-# Getting Started with Create React App
+# Task Management Application
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Description
 
-## Available Scripts
+The application will allow users to create, update, and delete tasks. Tasks should have a title, description, and a status (e.g., "TO_DO," "IN_PROGRESS," "DONE"). Users are also able to view a list of tasks and filter them by status.
 
-In the project directory, you can run:
+## Front-End
 
-### `npm start`
+1. **User Interface:** A user-friendly interface for the task management application is created. It contains the following components:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+   - A form to create a new task with fields for title, description, and status.
+   - A list of tasks with the ability to update the status or delete a task.
+   - A filter or dropdown to filter tasks by status (e.g., "All," "To Do," "In Progress," "Done").
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+2. **User Experience:** Implement smooth and responsive user interactions, including form validation to ensure that tasks cannot be created without a title. Use modern front-end technologies such as React
 
-### `npm test`
+3. **Styling:** Styling of application is done using CSS or any CSS preprocessor, Sass, along with a CSS framework, Tailwind CSS.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+4. **Responsive Design:** The application is responsive and works well on both desktop and mobile devices.
 
-### `npm run build`
+## Back-End
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. **API Development:** RESTful API is created to handle the CRUD (Create, Read, Update, Delete) operations for tasks. The API is built using Node.js with Express.js.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+2. **Data Storage:** A database is used to store task data. PostgreSQL is used as the database.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+3. **Validation:** Server-side validation is implemented to ensure that task data is valid before saving it to the database. Tasks must have a title and a valid status.
 
-### `npm run eject`
+4. **Error Handling:** Errors are handled gracefully, returning useful error messages and status codes.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Unit Testing
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+1. **Unit Tests:** Unit tests for critical parts of the application, such as API endpoints and data validation logic, are implemented using a testing framework such as Jest.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Bonus Features
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+1. User authentication and authorization to restrict access to tasks.
+2. Task due dates and reminders.
+3. Task sorting and searching capabilities.
+4. User profiles with avatars.
 
-## Learn More
+## Installation and Usage
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+1. Clone the repository and change the working directory to the project directory.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+   ```bash
+   git clone <repo-url> && cd <project-directory>
+   ```
 
-### Code Splitting
+2. Change to the `client` directory and install the dependencies.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+   ```bash
+   cd client && npm install
+   ```
 
-### Analyzing the Bundle Size
+3. Start the React development server.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+   ```bash
+   npm start
+   ```
 
-### Making a Progressive Web App
+4. Start the PostgreSQL server and create a new database.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+   ```bash
+   createdb task_management
+   ```
 
-### Advanced Configuration
+5. Migrate the database.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+   ```bash
+   npm run migrate
+   ```
 
-### Deployment
+6. Seed the database.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+   ```bash
+   npm run seed
+   ```
 
-### `npm run build` fails to minify
+7. Open a new terminal and change to the `server` directory and install the dependencies.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+   ```bash
+   cd server && npm install
+   ```
+
+8. Copy the `.env.example` file to `.env` and update the environment variables.
+
+   ```bash
+   cp .env.example .env
+   ```
+
+9. Start the Node.js server.
+
+   ```bash
+   npm start
+   ```
+
+10. Open the browser and navigate to `http://localhost:3000/` to view the application.
