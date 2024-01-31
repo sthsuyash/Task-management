@@ -1,5 +1,5 @@
 import {Outlet} from "react-router-dom";
-import { useAppSelector} from "../hooks/redux-hooks";
+import {useAppSelector} from "../hooks/redux-hooks";
 import {Navigate} from "react-router-dom";
 
 const DefaultLayout = () => {

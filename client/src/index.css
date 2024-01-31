@@ -98,7 +98,7 @@
   }
 
   .privacy-h2{
-    @apply mt-7 mb-3 text-slate-900 font-bold text-xl text-left;
+    @apply mt-7 mb-3 text-slate-900 font-bold text-xl text-left dark:text-white;
   }
 }
 
