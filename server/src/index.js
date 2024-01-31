@@ -1,9 +1,9 @@
 import express from "express";
 import cors from "cors";
+import swaggerUi from "swagger-ui-express";
 
 import {API_PORT} from "./config/env.js";
 import routes from "./routes/index.js";
-
 import logger from "./config/logger.js";
 
 const app = express();
@@ -20,6 +20,10 @@ app.use(
 
 // Routes
 app.use("/api/v1", routes);
+
+// Swagger
+import swaggerDocument from "../docs/swagger.json" assert {type: "json"};
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 try {
     app.listen(API_PORT, () => {

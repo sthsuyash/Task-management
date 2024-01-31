@@ -1,30 +1,36 @@
 import "./App.css";
-import {ThemeProvider} from "./components/theme-provider";
 
-import {Tasks, columns} from "./components/tasks/columns";
-import {DataTable} from "./components/tasks/data-table";
+import { Routes, Route } from "react-router-dom";
 
-import Header from "./components/Header";
+/* Layout Components */
+import DefaultLayout from "./layout/DefaultLayout";
+import ProtectedLayout from "./layout/ProtectedLayout";
 
-function App() {
-    const data: Tasks[] = [
-        {
-            id: "1",
-            status: "TO_DO",
-            title: "Task 1",
-            description: "This is task 1",
-        },
-    ];
+/* Pages */
+import Home from "./pages/Home";
+import Login from "./pages/Auth/Login";
+import Register from "./pages/Auth/Register";
+import Task from "./pages/Tasks/Task";
+import ErrorPage from "./pages/error-page";
+import Privacy from "./pages/Privacy";
+import Terms from "./pages/Terms";
 
+export default function App() {
     return (
-        <ThemeProvider storageKey="vite-ui-theme">
-            <Header />
-
-            <div className="container mx-auto py-10">
-                <DataTable columns={columns} data={data} />
-            </div>
-        </ThemeProvider>
+        <>
+            <Routes>
+                <Route element={<DefaultLayout />}>
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/register" element={<Register />} />
+                    <Route path="/privacy" element={<Privacy />} />
+                    <Route path="/terms" element={<Terms />} />
+                    <Route path="*" element={<ErrorPage />} />
+                </Route>
+                <Route element={<ProtectedLayout />}>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/tasks/:id" element={<Task />} />
+                </Route>
+            </Routes>
+        </>
     );
 }
-
-export default App;

@@ -1,7 +1,7 @@
 import prisma from "../config/prisma.js";
 import logger from "../config/logger.js";
-import { paginate } from "../utils/pagination.js";
-import { API_URL } from "../config/env.js";
+import {paginate} from "../utils/pagination.js";
+import {API_URL} from "../config/env.js";
 
 const api_name = `${API_URL}/task`;
 
@@ -17,19 +17,19 @@ const api_name = `${API_URL}/task`;
  */
 export const createTask = async (req, res) => {
     try {
-        const { title, description } = req.body;
+        const {title, description} = req.body;
 
         if (!title) {
             logger.error(`${api_name}: title is required.`);
             return res.status(400).json({
-                message: "Title is required."
+                message: "Title is required.",
             });
         }
 
         if (!description) {
             logger.error(`${api_name}: description is required.`);
             return res.status(400).json({
-                message: "Description is required."
+                message: "Description is required.",
             });
         }
 
@@ -53,7 +53,7 @@ export const createTask = async (req, res) => {
     } catch (error) {
         logger.error(`${api_name}: ${error}.`);
         res.status(500).json({
-            message: "Something went wrong."
+            message: "Something went wrong.",
         });
     }
 };
@@ -71,10 +71,10 @@ export const getTasks = async (req, res) => {
         const page = parseInt(req.query.page) || 1;
         const conditions = req.user
             ? {
-                where: {
-                    userId: req.userId,
-                },
-            }
+                  where: {
+                      userId: req.userId,
+                  },
+              }
             : {};
         const tasks = await paginate("task", api_name, page, conditions);
 
@@ -86,7 +86,7 @@ export const getTasks = async (req, res) => {
     } catch (error) {
         logger.error(`${api_name}: ${error}.`);
         res.status(500).json({
-            message: "Something went wrong."
+            message: "Something went wrong.",
         });
     }
 };
@@ -103,16 +103,16 @@ export const getTasks = async (req, res) => {
  */
 export const getTask = async (req, res) => {
     try {
-        const { id } = req.params;
+        const {id} = req.params;
 
         const task = await prisma.task.findUnique({
-            where: { id },
+            where: {id},
         });
 
         if (!task) {
             logger.error(`${api_name}: ${id} does not exist.`);
             return res.status(400).json({
-                message: "Task does not exist."
+                message: "Task does not exist.",
             });
         }
 
@@ -124,7 +124,7 @@ export const getTask = async (req, res) => {
     } catch (error) {
         logger.error(`${api_name}: ${error}.`);
         res.status(500).json({
-            message: "Something went wrong."
+            message: "Something went wrong.",
         });
     }
 };
@@ -143,43 +143,43 @@ export const getTask = async (req, res) => {
  */
 export const updateTask = async (req, res) => {
     try {
-        const { id } = req.params;
-        const { title, description } = req.body;
+        const {id} = req.params;
+        const {title, description} = req.body;
 
         if (!title) {
             logger.error(`${api_name}: title is required.`);
             return res.status(400).json({
-                message: "Title is required."
+                message: "Title is required.",
             });
         }
 
         if (!description) {
             logger.error(`${api_name}: description is required.`);
             return res.status(400).json({
-                message: "Description is required."
+                message: "Description is required.",
             });
         }
 
         const taskExists = await prisma.task.findUnique({
-            where: { id },
+            where: {id},
         });
 
         if (taskExists.title === title) {
             logger.error(`${api_name}: ${title} already exists.`);
             return res.status(400).json({
-                message: "Task title already exists."
+                message: "Task title already exists.",
             });
         }
 
         if (taskExists.description === description) {
             logger.error(`${api_name}: ${description} already exists.`);
             return res.status(400).json({
-                message: "Task description already exists."
+                message: "Task description already exists.",
             });
         }
 
         const task = await prisma.task.update({
-            where: { id },
+            where: {id},
             data: {
                 title,
                 description,
@@ -189,7 +189,7 @@ export const updateTask = async (req, res) => {
         if (!task) {
             logger.error(`${api_name}: does not exist.`);
             return res.status(400).json({
-                message: "Task does not exist."
+                message: "Task does not exist.",
             });
         }
 
@@ -200,7 +200,7 @@ export const updateTask = async (req, res) => {
     } catch (error) {
         logger.error(`${api_name}: ${error}`);
         res.status(500).json({
-            message: "Something went wrong."
+            message: "Something went wrong.",
         });
     }
 };
@@ -217,16 +217,16 @@ export const updateTask = async (req, res) => {
  */
 export const deleteTask = async (req, res) => {
     try {
-        const { id } = req.params;
+        const {id} = req.params;
 
         const task = await prisma.task.delete({
-            where: { id },
+            where: {id},
         });
 
         if (!task) {
             logger.error(`${api_name}: ${id} does not exist`);
             return res.status(400).json({
-                message: "Task does not exist."
+                message: "Task does not exist.",
             });
         }
 
@@ -237,7 +237,7 @@ export const deleteTask = async (req, res) => {
     } catch (error) {
         logger.error(`${api_name}: ${error}`);
         res.status(500).json({
-            message: "Something went wrong."
+            message: "Something went wrong.",
         });
     }
 };
@@ -267,7 +267,7 @@ export const deleteTasks = async (req, res) => {
     } catch (error) {
         logger.error(`${api_name}: ${error}`);
         res.status(500).json({
-            message: "Something went wrong."
+            message: "Something went wrong.",
         });
     }
 };
@@ -285,36 +285,36 @@ export const deleteTasks = async (req, res) => {
  */
 export const updateTaskStatus = async (req, res) => {
     try {
-        const { id } = req.params;
-        const { status } = req.body;
+        const {id} = req.params;
+        const {status} = req.body;
 
         if (!status) {
             logger.error(`${api_name}: Status is required.`);
             return res.status(400).json({
-                message: "Status is required."
+                message: "Status is required.",
             });
         }
 
         const task = await prisma.task.update({
-            where: { id },
-            data: { status },
+            where: {id},
+            data: {status},
         });
 
         if (!task) {
             logger.error(`${api_name}: ${id} does not exist.`);
             return res.status(400).json({
-                message: "Task does not exist."
+                message: "Task does not exist.",
             });
         }
 
         logger.info(`${api_name}: ${task.title} updated successfully.`);
         res.status(200).json({
-            message: "Task updated successfully."
+            message: "Task updated successfully.",
         });
     } catch (error) {
         logger.error(`${api_name}: ${error}`);
         res.status(500).json({
-            message: "Something went wrong."
+            message: "Something went wrong.",
         });
     }
 };

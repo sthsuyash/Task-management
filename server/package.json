@@ -10,7 +10,10 @@
         "lint": "eslint .",
         "lint:fix": "eslint --fix .",
         "format": "prettier --write .",
-        "format:check": "prettier --check ."
+        "format:check": "prettier --check .",
+        "swagger": "node ./docs/swagger.js",
+        "prisma": "npx prisma migrate dev --name init",
+        "generate": "npx prisma generate"
     },
     "keywords": [],
     "author": "",
@@ -33,6 +36,8 @@
         "express": "^4.18.2",
         "jsonwebtoken": "^9.0.2",
         "pg": "^8.11.3",
+        "swagger-autogen": "^2.23.7",
+        "swagger-ui-express": "^5.0.0",
         "winston": "^3.11.0"
     }
 }

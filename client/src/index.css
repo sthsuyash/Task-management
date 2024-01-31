@@ -1,7 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
- 
+
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -48,12 +50,55 @@
     --ring: 142.4 71.8% 29.2%;
   }
 }
- 
+
+/* change the scrollbar */
+@layer base {
+
+  /* Scrollbar Track */
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background-color: #a3a3a3;
+    /* color of the scrollbar handle */
+    border-radius: 6px;
+    /* roundness of the scrollbar handle */
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: var(--red);
+    /* color of the scrollbar handle on hover */
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    /* color of the scrollbar track */
+  }
+
+  /* Handle when the scrollbar is active (i.e., clicked) */
+  ::-webkit-scrollbar-thumb:active {
+    background-color: #777;
+    /* color of the scrollbar handle when active */
+  }
+}
 @layer base {
   * {
     @apply border-border;
+    scroll-behavior: smooth;
   }
   body {
     @apply bg-background text-foreground;
   }
+  html {
+    font-family: 'Poppins', sans-serif;
+  }
+
+  .privacy-h2{
+    @apply mt-7 mb-3 text-slate-900 font-bold text-xl text-left;
+  }
 }
+

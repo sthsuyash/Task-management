@@ -6,9 +6,11 @@ type AvatarProps = {
 };
 
 export default function CustomAvatar({name, src}: AvatarProps) {
+    const initials = name ? name.match(/\b\w/g) || [] : []; // Get initials
+
     return (
         <Avatar>
-            <AvatarFallback>{name}</AvatarFallback>
+            <AvatarFallback>{initials.slice(0, 2)}</AvatarFallback>
             <AvatarImage src={src} alt={name} />
         </Avatar>
     );
