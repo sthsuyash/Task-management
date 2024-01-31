@@ -1,18 +1,18 @@
-import {useState} from "react";
+import { useState } from "react";
 
-import {cn} from "@/lib/utils";
-import {Icons} from "@/components/icons";
-import {Button} from "@/components/ui/button";
-import {Input} from "@/components/ui/input";
-import {Label} from "@/components/ui/label";
-import {Link} from "react-router-dom";
-import {toast} from "sonner";
-import {useAppDispatch} from "@/hooks/redux-hooks";
-import {login} from "@/slices/authSlice";
+import { cn } from "@/lib/utils";
+import { Icons } from "@/components/icons";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Link, Navigate } from "react-router-dom";
+import { toast } from "sonner";
+import { useAppDispatch } from "@/hooks/redux-hooks";
+import { register } from "@/slices/authSlice";
 
-interface RegisterFormProps extends React.HTMLAttributes<HTMLDivElement> {}
+interface RegisterFormProps extends React.HTMLAttributes<HTMLDivElement> { }
 
-export default function Register({className, ...props}: RegisterFormProps) {
+export default function Register({ className, ...props }: RegisterFormProps) {
     const dispatch = useAppDispatch();
 
     const [name, setName] = useState<string>("");
@@ -32,8 +32,12 @@ export default function Register({className, ...props}: RegisterFormProps) {
         }
 
         try {
-            await dispatch(login({email, password})).unwrap();
-            toast.success("Login successful");
+            const resData = await dispatch(register({ name, email, password })).unwrap();
+            toast.success(resData);
+
+            setTimeout(() => {
+                <Navigate to="/login" />;
+            }, 2000);
         } catch (e: any) {
             toast.error(e.message);
         }

@@ -14,6 +14,7 @@ import Task from "./pages/Tasks/Task";
 import ErrorPage from "./pages/error-page";
 import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
+import Profile from "./pages/Auth/Profile";
 
 export default function App() {
     return (
@@ -29,6 +30,7 @@ export default function App() {
                 <Route element={<ProtectedLayout />}>
                     <Route path="/" element={<Home />} />
                     <Route path="/tasks/:id" element={<Task />} />
+                    <Route path="/profile" element={<Profile />} />
                 </Route>
             </Routes>
         </>

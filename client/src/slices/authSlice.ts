@@ -36,30 +36,28 @@ const initialState: AuthApiState = {
 };
 
 export const login = createAsyncThunk("login", async (data: User) => {
-    const response = await axiosInstance.post("/login", data);
-    const resData = response.data;
+    try {
+        const response = await axiosInstance.post("/user/login", data);
+        const resData = response.data;
 
-    localStorage.setItem("userInfo", JSON.stringify(resData));
+        localStorage.setItem("userInfo", JSON.stringify(resData.token));
 
-    return resData;
+        return resData.message;
+    } catch (error) {
+        console.log(error);
+        return error;
+    }
 });
 
 export const register = createAsyncThunk("register", async (data: NewUser) => {
-    const response = await axiosInstance.post("/register", data);
+    const response = await axiosInstance.post("/user/register", data);
     const resData = response.data;
-
-    localStorage.setItem("userInfo", JSON.stringify(resData));
-
-    return resData;
+    return resData.message;
 });
 
 export const logout = createAsyncThunk("logout", async () => {
-    const response = await axiosInstance.post("/logout", {});
-    const resData = response.data;
-
     localStorage.removeItem("userInfo");
-
-    return resData;
+    return "User logged out.";
 });
 
 export const getUser = createAsyncThunk("users/profile", async (userId: string) => {

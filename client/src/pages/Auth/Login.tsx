@@ -31,10 +31,10 @@ export default function Login({className, ...props}: LoginFormProps) {
         }
 
         try {
-            await dispatch(login({email, password})).unwrap();
-            toast.success("Login successful");
+            const res = await dispatch(login({email, password})).unwrap();
+            toast.success(res);
         } catch (e: any) {
-            toast.error(e.message);
+            toast.error(e);
         }
     }
 

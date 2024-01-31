@@ -1,38 +1,32 @@
-import {useEffect} from "react";
-import {Button} from "@/components/ui/button";
-import {useAppDispatch, useAppSelector} from "../hooks/redux-hooks";
-import {getUser, logout} from "../slices/authSlice";
-import {useNavigate} from "react-router-dom";
+import { DataTable } from "./Tasks/data-table";
+import { Tasks, columns } from "./Tasks/columns";
 
 const Home = () => {
-    const dispatch = useAppDispatch();
-    const navigate = useNavigate();
-
-    const basicUserInfo = useAppSelector(state => state.auth.basicUserInfo);
-    const userProfileInfo = useAppSelector(state => state.auth.userProfileData);
-
-    useEffect(() => {
-        if (basicUserInfo) {
-            dispatch(getUser(basicUserInfo.id));
-        }
-    }, [basicUserInfo]);
-
-    const handleLogout = async () => {
-        try {
-            await dispatch(logout()).unwrap();
-            navigate("/login");
-        } catch (e) {
-            console.error(e);
-        }
-    };
+    const data: Tasks[] = [
+        {
+            id: "1",
+            title: "Task 1",
+            description: "Description 1",
+            status: "TO_DO",
+        },
+        {
+            id: "2",
+            title: "Task 2",
+            description: "Description 2",
+            status: "IN_PROGRESS",
+        },
+        {
+            id: "3",
+            title: "Task 3",
+            description: "Description 3",
+            status: "DONE",
+        },
+    ];
 
     return (
-        <>
-            <h1>Home</h1>
-            <h4>Name: {userProfileInfo?.name}</h4>
-            <h4>Email: {userProfileInfo?.email}</h4>
-            <Button onClick={handleLogout}>Logout</Button>
-        </>
+        <div className="lg:mx-20 m-4"> 
+            <DataTable columns={columns} data={data} />
+        </div>
     );
 };
 
